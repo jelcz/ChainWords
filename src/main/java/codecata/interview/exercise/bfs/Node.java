@@ -1,4 +1,4 @@
-package org.example.bfs;
+package codecata.interview.exercise.bfs;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -6,7 +6,7 @@ import java.util.Set;
 public class Node {
 
     private String word;
-    private Set<Node> outNodes;
+    private Set<Node> neighbourhood;
 
     public String toString() {
         return word;
@@ -14,22 +14,22 @@ public class Node {
 
     public Node(String word) {
         this.word = word;
-        this.outNodes = new HashSet<>();
+        this.neighbourhood = new HashSet<>();
     }
 
-    public void addOutNode(Node node) {
-        if (!this.outNodes.contains(node)) {
-            this.outNodes.add(node);
-            node.addOutNodeBackwards(this);
+    public void addNeighbour(Node node) {
+        if (!this.neighbourhood.contains(node)) {
+            this.neighbourhood.add(node);
+            node.addNeighbourBackwards(this);
         }
     }
 
-    public void addOutNodeBackwards(Node node) {
-        this.outNodes.add(node);
+    public void addNeighbourBackwards(Node node) {
+        this.neighbourhood.add(node);
     }
 
-    public Set<Node> getOutNodes() {
-        return outNodes;
+    public Set<Node> getNeighbourhood() {
+        return neighbourhood;
     }
 
     public String getWord() {
@@ -44,5 +44,10 @@ public class Node {
         Node node = (Node) o;
 
         return word != null ? word.equals(node.word) : node.word == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return word.hashCode();
     }
 }

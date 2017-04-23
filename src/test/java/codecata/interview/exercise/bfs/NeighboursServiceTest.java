@@ -1,5 +1,7 @@
-package org.example.bfs;
+package codecata.interview.exercise.bfs;
 
+import codecata.interview.exercise.bfs.NeighboursService;
+import codecata.interview.exercise.bfs.Node;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -11,7 +13,7 @@ public class NeighboursServiceTest {
     NeighboursService neighboursService = new NeighboursService();
 
     @Test
-    public void shouldAddOutNodes() {
+    public void shouldAddNeighbours() {
         List<Node> listNodes = new LinkedList<>();
         Node aaa = new Node("aaa");
         Node aab = new Node("aab");
@@ -32,15 +34,15 @@ public class NeighboursServiceTest {
         listNodes.add(bec);
 
         neighboursService.fillNeighbourList(listNodes);
-        assertThat(aaa.getOutNodes().contains(aab));
-        assertThat(aab.getOutNodes().contains(aaa));
-        assertThat(adb.getOutNodes().contains(adf));
-        assertThat(bec.getOutNodes().contains(aec));
-        assertThat(aac.getOutNodes().contains(aec));
-        assertThat(aec.getOutNodes().contains(aac));
-        assertThat(!aaa.getOutNodes().contains(bec));
-        assertThat(!aaa.getOutNodes().contains(aef));
-        assertThat(!aaa.getOutNodes().contains(adb));
+        assertThat(aaa.getNeighbourhood().contains(aab));
+        assertThat(aab.getNeighbourhood().contains(aaa));
+        assertThat(adb.getNeighbourhood().contains(adf));
+        assertThat(bec.getNeighbourhood().contains(aec));
+        assertThat(aac.getNeighbourhood().contains(aec));
+        assertThat(aec.getNeighbourhood().contains(aac));
+        assertThat(!aaa.getNeighbourhood().contains(bec));
+        assertThat(!aaa.getNeighbourhood().contains(aef));
+        assertThat(!aaa.getNeighbourhood().contains(adb));
     }
 }
 

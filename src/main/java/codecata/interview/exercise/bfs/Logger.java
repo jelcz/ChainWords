@@ -1,4 +1,4 @@
-package org.example.bfs;
+package codecata.interview.exercise.bfs;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -1,5 +1,7 @@
-package org.example.bfs;
+package codecata.interview.exercise.bfs;
 
+import codecata.interview.exercise.bfs.ChainServiceBFS;
+import codecata.interview.exercise.bfs.Node;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -42,7 +44,7 @@ public class AppTest {
     public void approachBFSMapPerformance() {
         String FILE_PATH = "src/main/resources/wordlist.txt";
         long sum = 0;
-        int counter = 5;
+        int counter = 1;
         for (int i = 0; i < counter; i++) {
 
             long start = System.currentTimeMillis();
@@ -95,11 +97,11 @@ public class AppTest {
         chainServiceBFS.checkValid(FILE_PATH, wordOne, wordTwo);
     }
     @Test
-    public void shouldAddOutNodes() {
+    public void shouldAddNeighbour() {
         Node a = new Node("a");
         Node b = new Node("b");
-        a.addOutNode(b);
-        assertThat(a.getOutNodes().contains(b) && b.getOutNodes().contains(a));
+        a.addNeighbour(b);
+        assertThat(a.getNeighbourhood().contains(b) && b.getNeighbourhood().contains(a));
     }
 
     @Test
@@ -139,15 +141,15 @@ public class AppTest {
     }
 
     private void prepareGraph(Node a, Node b, Node c, Node d, Node e, Node f, Node g, Node h) {
-        a.addOutNode(b);
-        a.addOutNode(c);
-        b.addOutNode(c);
-        f.addOutNode(b);
-        f.addOutNode(g);
-        g.addOutNode(h);
-        h.addOutNode(d);
-        c.addOutNode(d);
-        d.addOutNode(e);
+        a.addNeighbour(b);
+        a.addNeighbour(c);
+        b.addNeighbour(c);
+        f.addNeighbour(b);
+        f.addNeighbour(g);
+        g.addNeighbour(h);
+        h.addNeighbour(d);
+        c.addNeighbour(d);
+        d.addNeighbour(e);
     }
 
 }

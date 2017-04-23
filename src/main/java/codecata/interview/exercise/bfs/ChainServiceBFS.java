@@ -1,6 +1,4 @@
-package org.example.bfs;
-
-import org.example.ChainService;
+package codecata.interview.exercise.bfs;
 
 import java.io.*;
 import java.util.*;
@@ -73,7 +71,7 @@ public class ChainServiceBFS implements ChainService {
             if (current.equals(finish)) {
                 break;
             } else {
-                for (Node node : current.getOutNodes()) {
+                for (Node node : current.getNeighbourhood()) {
                     if (!vis.contains(node)) {
                         q.add(node);
                         vis.add(node);
@@ -94,7 +92,7 @@ public class ChainServiceBFS implements ChainService {
     }
 
     public List<Node> makeNodeList(List<String> list) {
-        List<Node> result = new ArrayList<>();
+        List<Node> result = new ArrayList<>(list.size());
         list.forEach(str -> result.add(new Node(str.toLowerCase())));
         return result;
     }
@@ -107,7 +105,7 @@ public class ChainServiceBFS implements ChainService {
             return bufferedReader.lines()
                     .collect(Collectors.groupingBy(String::length));//faster than List<String>
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log("Failed to read file");
             return null;
         }
     }
