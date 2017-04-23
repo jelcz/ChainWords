@@ -2,10 +2,7 @@ package org.example.bfs;
 
 import org.example.ChainService;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -14,30 +11,30 @@ public class ChainServiceBFS implements ChainService {
     static Logger logger = new Logger();
     static NeighboursService neighboursService = new NeighboursService();
 
-   /* public static void checkValidSolve(String filePath, String firstWord, String secondWord) {
-        logger.log("Start");
+    public void checkValid(String filePath, String firstWord, String secondWord) {
+        logger.log("Check valid");
+
+        if (firstWord == null || secondWord == null || firstWord.length() == 0) {
+            throw new RuntimeException("Words are empty");
+        }
         if (firstWord.length() != secondWord.length()) {
             throw new RuntimeException("Words differ in length");
         }
-
-        List<String> entriesList = readFile(filePath, firstWord.length());
-        solve(entriesList.stream().distinct().collect(Collectors.toList()), firstWord, secondWord);
-        logger.log("Finish");
-    }*/
-
-    public void checkValidSolve(String filePath, String firstWord, String secondWord) {
-        logger.log("Start");
-        if (firstWord.length() != secondWord.length()) {
-            throw new RuntimeException("Words differ in length");
+        File f = new File(filePath);
+        if (!f.exists() || f.isDirectory()) {
+            throw new RuntimeException("Wrong file path");
         }
-        Map<Integer, List<String>> entriesMap = readFileMap(filePath);
-        logger.log(solve(entriesMap.get(firstWord.length()).stream().distinct().collect(Collectors.toList()), firstWord, secondWord).toString());
-        logger.log("Finish");
     }
 
-    public List<Node> solve(List<String> entriesList, String wordOne, String wordTwo) {
+    public List<Node> solve(String filePath, String wordOne, String wordTwo) {
+        logger.log("Solve");
+        Map<Integer, List<String>> entriesMap = readFile(filePath);
 
-        logger.log("Prepare data");
+        List<String> entriesList = entriesMap.get(wordOne.length())
+                .stream()
+                .distinct()
+                .collect(Collectors.toList());
+
         List<Node> nodeList = makeNodeList(entriesList);
 
         Node nodeOne = getNodeIfExists(nodeList, new Node(wordOne));
@@ -51,7 +48,10 @@ public class ChainServiceBFS implements ChainService {
     private Node getNodeIfExists(List<Node> nodeList, Node node) {
         if (nodeList.contains(node)) {
             Node finalNode = node;
-            node = nodeList.stream().filter(p -> p.equals(finalNode)).findFirst().get();
+            node = nodeList.stream()
+                    .filter(p -> p.equals(finalNode))
+                    .findFirst()
+                    .get();
         } else {
             throw new RuntimeException("No path between words.");
         }
@@ -89,6 +89,7 @@ public class ChainServiceBFS implements ChainService {
             path.add(node);
         }
         Collections.reverse(path);
+        logger.log(path.toString());
         return path;
     }
 
@@ -98,26 +99,17 @@ public class ChainServiceBFS implements ChainService {
         return result;
     }
 
-    public List<String> readFile(String filePath, Integer length) {
+    public Map<Integer, List<String>> readFile(String filePath) {
         logger.log("Reading file");
-        BufferedReader bufferedReader = null;
+        BufferedReader bufferedReader;
         try {
             bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "utf-8"));
+            return bufferedReader.lines()
+                    .collect(Collectors.groupingBy(String::length));//faster than List<String>
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-        return bufferedReader.lines().collect(Collectors.toList()).stream().filter(m -> (m.length() == length)).collect(Collectors.toList());
-    }
-
-    public Map<Integer, List<String>> readFileMap(String filePath) {
-        logger.log("Reading file");
-        BufferedReader bufferedReader = null;
-        try {
-            bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "utf-8"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bufferedReader.lines().collect(Collectors.groupingBy(String::length));//faster than List<String>
     }
 }
 
