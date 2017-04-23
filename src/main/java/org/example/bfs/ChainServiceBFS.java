@@ -94,7 +94,7 @@ public class ChainServiceBFS implements ChainService {
     }
 
     public List<Node> makeNodeList(List<String> list) {
-        List<Node> result = new LinkedList<>();
+        List<Node> result = new ArrayList<>();
         list.forEach(str -> result.add(new Node(str.toLowerCase())));
         return result;
     }
