@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class AppTest {
-    ChainServiceBFS chainServiceBFS = new ChainServiceBFS();
+    private ChainServiceBFS chainServiceBFS = new ChainServiceBFS();
 
     @Test
     public void shouldReturnCorrectChainLeadGold() {

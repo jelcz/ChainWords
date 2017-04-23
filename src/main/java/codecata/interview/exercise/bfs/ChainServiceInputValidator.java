@@ -2,9 +2,9 @@ package codecata.interview.exercise.bfs;
 
 import java.io.File;
 
-public class ChainServiceInputValidator {
+class ChainServiceInputValidator {
 
-    public static void checkValid(String filePath, String firstWord, String secondWord) {
+    static void checkValid(String filePath, String firstWord, String secondWord) {
         Logger.log("Check valid");
 
         areWordsEmpty(firstWord, secondWord);

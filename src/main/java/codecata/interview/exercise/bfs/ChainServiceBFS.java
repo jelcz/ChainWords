@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class ChainServiceBFS implements ChainService {
 
-    static NeighboursService neighboursService = new NeighboursService();
+    private static NeighboursService neighboursService = new NeighboursService();
 
     public List<Node> solve(String filePath, String wordOne, String wordTwo) {
         Logger.log("Solve");
@@ -15,7 +15,7 @@ public class ChainServiceBFS implements ChainService {
         Node nodeOne = getNodeIfExists(nodeList, new Node(wordOne));
         Node nodeTwo = getNodeIfExists(nodeList, new Node(wordTwo));
 
-        neighboursService.fillNeighbourList(nodeList);
+        NeighboursService.fillNeighbourList(nodeList);
 
         return getPathBFS(nodeOne, nodeTwo);
     }
@@ -44,12 +44,12 @@ public class ChainServiceBFS implements ChainService {
         return node;
     }
 
-    public List<Node> getPathBFS(Node start, Node finish) {
+    List<Node> getPathBFS(Node start, Node finish) {
         Logger.log("BFS");
         Set<Node> vis = new HashSet<>();
-        Map<Node, Node> prev = new HashMap<Node, Node>();
+        Map<Node, Node> prev = new HashMap<>();
 
-        List<Node> path = new LinkedList();
+        LinkedList<Node> path = new LinkedList();
         Queue<Node> queue = new LinkedList();
         Node current = start;
         queue.add(current);
@@ -79,7 +79,7 @@ public class ChainServiceBFS implements ChainService {
         return path;
     }
 
-    public List<Node> fillNodeList(List<String> list) {
+    private List<Node> fillNodeList(List<String> list) {
         List<Node> result = new ArrayList<>(list.size());
         list.forEach(str -> result.add(new Node(str.toLowerCase())));
         return result;
