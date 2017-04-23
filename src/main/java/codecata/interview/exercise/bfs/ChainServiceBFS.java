@@ -6,8 +6,6 @@ import java.util.stream.Collectors;
 
 public class ChainServiceBFS implements ChainService {
 
-    private static NeighboursService neighboursService = new NeighboursService();
-
     public List<Node> solve(String filePath, String wordOne, String wordTwo) {
         Logger.log("Solve");
         List<Node> nodeList = prepareNodeList(filePath, wordOne);
@@ -18,6 +16,19 @@ public class ChainServiceBFS implements ChainService {
         NeighboursService.fillNeighbourList(nodeList);
 
         return getPathBFS(nodeOne, nodeTwo);
+    }
+
+    public Map<Integer, List<String>> readFile(String filePath) {
+        Logger.log("Reading file");
+        BufferedReader bufferedReader;
+        try {
+            bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "utf-8"));
+            return bufferedReader.lines()
+                    .collect(Collectors.groupingBy(String::length));//faster than List<String>
+        } catch (IOException e) {
+            Logger.log("Failed to read file");
+            return null;
+        }
     }
 
     private List<Node> prepareNodeList(String filePath, String wordOne) {
@@ -83,19 +94,6 @@ public class ChainServiceBFS implements ChainService {
         List<Node> result = new ArrayList<>(list.size());
         list.forEach(str -> result.add(new Node(str.toLowerCase())));
         return result;
-    }
-
-    public Map<Integer, List<String>> readFile(String filePath) {
-        Logger.log("Reading file");
-        BufferedReader bufferedReader;
-        try {
-            bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "utf-8"));
-            return bufferedReader.lines()
-                    .collect(Collectors.groupingBy(String::length));//faster than List<String>
-        } catch (IOException e) {
-            Logger.log("Failed to read file");
-            return null;
-        }
     }
 }
 

@@ -10,9 +10,11 @@ import static org.junit.Assert.assertTrue;
 public class AppTest {
     private ChainServiceBFS chainServiceBFS = new ChainServiceBFS();
 
+    private String FILE_PATH = "src/main/resources/wordlist.txt";
+    private String INVALID_FILE_PATH = "src/main/resources/wordlisst.txt";
+
     @Test
     public void shouldReturnCorrectChainLeadGold() {
-        String FILE_PATH = "src/main/resources/wordlist.txt";
         try {
             String wordOne = "lead";
             String wordTwo = "gold";
@@ -26,7 +28,6 @@ public class AppTest {
 
     @Test
     public void shouldReturnCorrectChainGoldLead() {
-        String FILE_PATH = "src/main/resources/wordlist.txt";
         try {
             String wordOne = "gold";
             String wordTwo = "lead";
@@ -40,7 +41,6 @@ public class AppTest {
 
     @Test
     public void approachBFSSetPerformance() {
-        String FILE_PATH = "src/main/resources/wordlist.txt";
         long sum = 0;
         int counter = 1;
         for (int i = 0; i < counter; i++) {
@@ -64,16 +64,14 @@ public class AppTest {
     }
 
     @Test(expected=RuntimeException.class)
-    public void shouldReturnNullFileNotFound() {
-        String FILE_PATH = "src/main/resources/wordlisst.txt";
+    public void shouldThrowExceptionNotFound() {
         String wordOne = "lead";
         String wordTwo = "gold";
-        ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);
+        ChainServiceInputValidator.checkValid(INVALID_FILE_PATH, wordOne, wordTwo);
     }
 
     @Test(expected=RuntimeException.class)
     public void shouldThrowExceptionDifferentLength() {
-        String FILE_PATH = "src/main/resources/wordlist.txt";
         String wordOne = "leads";
         String wordTwo = "gold";
         ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);
@@ -81,7 +79,6 @@ public class AppTest {
 
     @Test(expected=RuntimeException.class)
     public void shouldThrowExceptionNullWord() {
-        String FILE_PATH = "src/main/resources/wordlist.txt";
         String wordOne = null;
         String wordTwo = null;
         ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);
@@ -89,7 +86,6 @@ public class AppTest {
 
     @Test(expected=RuntimeException.class)
     public void shouldThrowExceptionWrongWord() {
-        String FILE_PATH = "src/main/resources/wordlist.txt";
         String wordOne = "";
         String wordTwo = "";
         ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);

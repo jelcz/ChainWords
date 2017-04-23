@@ -1,7 +1,5 @@
 package codecata.interview.exercise.bfs;
 
-import codecata.interview.exercise.bfs.NeighboursService;
-import codecata.interview.exercise.bfs.Node;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -10,7 +8,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NeighboursServiceTest {
-    NeighboursService neighboursService = new NeighboursService();
+    private NeighboursService neighboursService = new NeighboursService();
 
     @Test
     public void shouldAddNeighbours() {
