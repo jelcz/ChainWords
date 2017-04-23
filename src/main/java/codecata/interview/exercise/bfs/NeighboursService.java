@@ -10,7 +10,8 @@ public class NeighboursService {
                 if (checkIfNeighbours(parentNode.getWord(), node.getWord(), wordLength))
                     parentNode.addNeighbour(node);
                 }
-            ));
+            )
+        );
     }
 
     private static boolean checkIfNeighbours(String left, String right, int wordLength) {

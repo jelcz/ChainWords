@@ -1,7 +1,5 @@
 package codecata.interview.exercise.bfs;
 
-import codecata.interview.exercise.bfs.ChainServiceBFS;
-import codecata.interview.exercise.bfs.Node;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -18,7 +16,7 @@ public class AppTest {
         try {
             String wordOne = "lead";
             String wordTwo = "gold";
-            chainServiceBFS.checkValid(FILE_PATH, wordOne, wordTwo);
+            ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);
             LinkedList<Node> resultList = (LinkedList<Node>) chainServiceBFS.solve(FILE_PATH, wordOne, wordTwo);
             assertTrue(resultList.toString().equals("[lead, load, goad, gold]"));
         } catch (RuntimeException e) {
@@ -32,7 +30,7 @@ public class AppTest {
         try {
             String wordOne = "gold";
             String wordTwo = "lead";
-            chainServiceBFS.checkValid(FILE_PATH, wordOne, wordTwo);
+            ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);
             LinkedList<Node> resultList = (LinkedList<Node>) chainServiceBFS.solve(FILE_PATH, wordOne, wordTwo);
             assertTrue(resultList.toString().equals("[gold, goad, load, lead]"));
         } catch (RuntimeException e) {
@@ -41,7 +39,7 @@ public class AppTest {
     }
 
     @Test
-    public void approachBFSMapPerformance() {
+    public void approachBFSSetPerformance() {
         String FILE_PATH = "src/main/resources/wordlist.txt";
         long sum = 0;
         int counter = 1;
@@ -52,7 +50,7 @@ public class AppTest {
             try {
                 String wordOne = "lead";
                 String wordTwo = "gold";
-                chainServiceBFS.checkValid(FILE_PATH, wordOne, wordTwo);
+                ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);
                 chainServiceBFS.solve(FILE_PATH, wordOne, wordTwo);
             } catch (RuntimeException e) {
                 e.printStackTrace();
@@ -70,7 +68,7 @@ public class AppTest {
         String FILE_PATH = "src/main/resources/wordlisst.txt";
         String wordOne = "lead";
         String wordTwo = "gold";
-        chainServiceBFS.checkValid(FILE_PATH, wordOne, wordTwo);
+        ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);
     }
 
     @Test(expected=RuntimeException.class)
@@ -78,7 +76,7 @@ public class AppTest {
         String FILE_PATH = "src/main/resources/wordlist.txt";
         String wordOne = "leads";
         String wordTwo = "gold";
-        chainServiceBFS.checkValid(FILE_PATH, wordOne, wordTwo);
+        ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);
     }
 
     @Test(expected=RuntimeException.class)
@@ -86,7 +84,7 @@ public class AppTest {
         String FILE_PATH = "src/main/resources/wordlist.txt";
         String wordOne = null;
         String wordTwo = null;
-        chainServiceBFS.checkValid(FILE_PATH, wordOne, wordTwo);
+        ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);
     }
 
     @Test(expected=RuntimeException.class)
@@ -94,7 +92,7 @@ public class AppTest {
         String FILE_PATH = "src/main/resources/wordlist.txt";
         String wordOne = "";
         String wordTwo = "";
-        chainServiceBFS.checkValid(FILE_PATH, wordOne, wordTwo);
+        ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);
     }
     @Test
     public void shouldAddNeighbour() {
@@ -151,6 +149,5 @@ public class AppTest {
         c.addNeighbour(d);
         d.addNeighbour(e);
     }
-
 }
 
