@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ChainServiceBFS implements ChainService {
+public class ChainServiceBFSImpl implements ChainService {
 
     public List<Node> solve(String filePath, String wordOne, String wordTwo) {
         Logger.log("Solve");

@@ -7,16 +7,17 @@ public class Main {
     private static String WORD_TWO = "gold";
 
     public static void main(String[] args) {
-        ChainServiceBFS chainServiceBFS = new ChainServiceBFS();
+        ChainServiceBFSImpl chainServiceBFSImpl = new ChainServiceBFSImpl();
+        ChainServiceInputValidator chainServiceInputValidator = new ChainServiceInputValidatorImpl();
         long sum = 0;
-        int counter = 1;
+        int counter = 5;
         for (int i = 0; i < counter; i++) {
 
             long start = System.currentTimeMillis();
 
             try {
-                ChainServiceInputValidator.checkValid(FILE_PATH, WORD_ONE, WORD_TWO);
-                chainServiceBFS.solve(FILE_PATH, WORD_ONE, WORD_TWO);
+                chainServiceInputValidator.checkValid(FILE_PATH, WORD_ONE, WORD_TWO);
+                chainServiceBFSImpl.solve(FILE_PATH, WORD_ONE, WORD_TWO);
             } catch (RuntimeException e) {
                 e.printStackTrace();
             }
