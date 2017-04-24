@@ -8,10 +8,6 @@ public class Node {
     private String word;
     private Set<Node> neighbourhood;
 
-    public String toString() {
-        return word;
-    }
-
     public Node(String word) {
         this.word = word;
         this.neighbourhood = new HashSet<>();
@@ -24,7 +20,7 @@ public class Node {
         }
     }
 
-    public void addNeighbourBackwards(Node node) {
+    private void addNeighbourBackwards(Node node) {
         this.neighbourhood.add(node);
     }
 
@@ -33,6 +29,10 @@ public class Node {
     }
 
     public String getWord() {
+        return word;
+    }
+
+    public String toString() {
         return word;
     }
 

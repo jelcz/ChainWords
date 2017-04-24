@@ -7,11 +7,10 @@ import java.util.LinkedList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class AppTest {
+public class ChainServiceTest {
     private ChainServiceBFS chainServiceBFS = new ChainServiceBFS();
 
     private String FILE_PATH = "src/main/resources/wordlist.txt";
-    private String INVALID_FILE_PATH = "src/main/resources/wordlisst.txt";
 
     @Test
     public void shouldReturnCorrectChainLeadGold() {
@@ -37,65 +36,6 @@ public class AppTest {
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-    }
-
-    @Test
-    public void approachBFSSetPerformance() {
-        long sum = 0;
-        int counter = 1;
-        for (int i = 0; i < counter; i++) {
-
-            long start = System.currentTimeMillis();
-
-            try {
-                String wordOne = "lead";
-                String wordTwo = "gold";
-                ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);
-                chainServiceBFS.solve(FILE_PATH, wordOne, wordTwo);
-            } catch (RuntimeException e) {
-                e.printStackTrace();
-            }
-
-            long finish = System.currentTimeMillis();
-            System.out.println(("Time single: " + (finish - start)));
-            sum += (finish - start);
-        }
-        System.out.println("Time average: " + (sum / counter));
-    }
-
-    @Test(expected=RuntimeException.class)
-    public void shouldThrowExceptionNotFound() {
-        String wordOne = "lead";
-        String wordTwo = "gold";
-        ChainServiceInputValidator.checkValid(INVALID_FILE_PATH, wordOne, wordTwo);
-    }
-
-    @Test(expected=RuntimeException.class)
-    public void shouldThrowExceptionDifferentLength() {
-        String wordOne = "leads";
-        String wordTwo = "gold";
-        ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);
-    }
-
-    @Test(expected=RuntimeException.class)
-    public void shouldThrowExceptionNullWord() {
-        String wordOne = null;
-        String wordTwo = null;
-        ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);
-    }
-
-    @Test(expected=RuntimeException.class)
-    public void shouldThrowExceptionWrongWord() {
-        String wordOne = "";
-        String wordTwo = "";
-        ChainServiceInputValidator.checkValid(FILE_PATH, wordOne, wordTwo);
-    }
-    @Test
-    public void shouldAddNeighbour() {
-        Node a = new Node("a");
-        Node b = new Node("b");
-        a.addNeighbour(b);
-        assertThat(a.getNeighbourhood().contains(b) && b.getNeighbourhood().contains(a));
     }
 
     @Test
@@ -146,4 +86,3 @@ public class AppTest {
         d.addNeighbour(e);
     }
 }
-
